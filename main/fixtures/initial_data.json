@@ -1,0 +1,21 @@
+[
+    {
+        "model": "main.article",
+        "pk": 1,
+        "fields": {
+            "title": "How to Reduce Plastic Use",
+            "content": "Practical tips on reducing plastic...",
+            "created_at": "2024-07-13T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 1,
+        "fields": {
+            "name": "Solar Lantern",
+            "description": "A lantern powered by solar energy.",
+            "image": "products/solar_lantern.jpg",
+            "created_at": "2024-07-13T10:00:00Z"
+        }
+    }
+]
