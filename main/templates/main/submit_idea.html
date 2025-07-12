@@ -1,3 +1,4 @@
+{% extends "base.html" %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,6 +6,7 @@
     <title>Submit Idea - GreenSite</title>
 </head>
 <body>
+{% block content %}
     <h1>Submit Your Idea</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -12,5 +14,6 @@
         <button type="submit">Submit</button>
     </form>
     <a href="{% url 'home' %}">Back to Home</a>
+{% endblock %}
 </body>
 </html>

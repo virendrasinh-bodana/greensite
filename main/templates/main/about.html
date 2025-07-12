@@ -1,3 +1,4 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,8 +6,13 @@
     <title>About Us - GreenSite</title>
 </head>
 <body>
+{% block content %}
+
+
     <h1>About GreenSite</h1>
     <p>We are committed to promoting eco-friendly ideas and products to build a greener future.</p>
     <a href="{% url 'home' %}">Back to Home</a>
+
+{% endblock %}
 </body>
 </html>

@@ -1,3 +1,4 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,28 +50,33 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to GreenSite</h1>
-        <p>Your hub for articles, eco-friendly products, and innovative ideas</p>
-    </header>
 
-    <nav>
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'articles' %}">Articles</a>
-        <a href="{% url 'products' %}">Products</a>
-        <a href="{% url 'submit_idea' %}">Submit Idea</a>
-        <a href="{% url 'dashboard' %}">Dashboard</a>
-        <a href="{% url 'about' %}">About</a>
-        <a href="{% url 'contact' %}">Contact</a>
-        {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}">Logout</a>
-        {% else %}
-            <a href="{% url 'login' %}">Login</a>
-            <a href="{% url 'register' %}">Register</a>
-        {% endif %}
-    </nav>
+{#{% block navigation %}#}
+{#    <header>#}
+{#        <h1>Welcome to GreenSite</h1>#}
+{#        <p>Your hub for articles, eco-friendly products, and innovative ideas</p>#}
+{#    </header>#}
+{##}
+{#    <nav>#}
+{#        <a href="{% url 'home' %}">Home</a>#}
+{#        <a href="{% url 'articles' %}">Articles</a>#}
+{#        <a href="{% url 'products' %}">Products</a>#}
+{#        <a href="{% url 'submit_idea' %}">Submit Idea</a>#}
+{#        <a href="{% url 'dashboard' %}">Dashboard</a>#}
+{#        <a href="{% url 'about' %}">About</a>#}
+{#        <a href="{% url 'contact' %}">Contact</a>#}
+{#        {% if user.is_authenticated %}#}
+{#            <a href="{% url 'logout' %}">Logout</a>#}
+{#        {% else %}#}
+{#            <a href="{% url 'login' %}">Login</a>#}
+{#            <a href="{% url 'register' %}">Register</a>#}
+{#        {% endif %}#}
+{#    </nav>#}
+{#{% endblock %}#}
 
-    <div class="container">
+    {% block content %}
+
+        <div class="container">
         <div class="section">
             <h2>Latest Articles</h2>
             <p>Check out our most recent articles on sustainability and green living. <a href="{% url 'articles' %}">Read more</a></p>
@@ -86,6 +92,10 @@
             <p>Have an innovative idea to share? We would love to hear it! <a href="{% url 'submit_idea' %}">Submit now</a></p>
         </div>
     </div>
+
+    {% endblock %}
+
+
 
     <footer>
         <p>&copy; 2025 GreenSite. All rights reserved.</p>

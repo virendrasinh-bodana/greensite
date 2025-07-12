@@ -1,3 +1,4 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +6,9 @@
     <title>Articles - GreenSite</title>
 </head>
 <body>
-    <h1>Articles</h1>
+
+{% block content %}
+     <h1>Articles</h1>
     <ul>
         {% for article in object_list %}
             <li><a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a> ({{ article.created_at|date:"M d, Y" }})</li>
@@ -14,5 +17,8 @@
         {% endfor %}
     </ul>
     <a href="{% url 'home' %}">Back to Home</a>
+
+{% endblock %}
+
 </body>
 </html>
