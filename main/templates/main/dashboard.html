@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - GreenSite</title>
+</head>
+<body>
+    <h1>My Dashboard</h1>
+    <h2>My Ideas</h2>
+    <ul>
+        {% for idea in ideas %}
+            <li>
+                <h3>{{ idea.title }}</h3>
+                <p>{{ idea.description }}</p>
+                {% if idea.image %}
+                    <img src="{{ idea.image.url }}" alt="{{ idea.title }}" width="200">
+                {% endif %}
+                <p>Submitted on {{ idea.created_at|date:"M d, Y" }}</p>
+            </li>
+        {% empty %}
+            <li>No ideas submitted yet.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>
