@@ -26,7 +26,7 @@ def home(request):
 # Article listing (Class-based)
 class ArticleListView(ListView):
     model = Article
-    template_name = 'main/article_list.html'
+    template_name = 'main/articles.html'
     context_object_name = 'articles'
 
 
@@ -40,7 +40,7 @@ class ArticleDetailView(DetailView):
 # Product listing
 def product_list(request):
     products = Product.objects.all()
-    return render(request, 'main/product_list.html', {'products': products})
+    return render(request, 'main/products.html', {'products': products})
 
 
 # Submit idea
