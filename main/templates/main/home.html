@@ -1,104 +1,97 @@
 {% extends 'base.html' %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home - GreenSite</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px 40px;
-            text-align: center;
-        }
-        nav {
-            background-color: #333;
-            overflow: hidden;
-        }
-        nav a {
-            float: left;
-            display: block;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 14px 20px;
-            text-decoration: none;
-        }
-        nav a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-        .container {
-            padding: 40px;
-        }
-        .section {
-            margin-bottom: 30px;
-        }
-        .section h2 {
-            color: #4CAF50;
-        }
-        footer {
-            background-color: #f2f2f2;
-            text-align: center;
-            padding: 15px;
-            margin-top: 30px;
-        }
-    </style>
-</head>
-<body>
 
-{#{% block navigation %}#}
-{#    <header>#}
-{#        <h1>Welcome to GreenSite</h1>#}
-{#        <p>Your hub for articles, eco-friendly products, and innovative ideas</p>#}
-{#    </header>#}
-{##}
-{#    <nav>#}
-{#        <a href="{% url 'home' %}">Home</a>#}
-{#        <a href="{% url 'articles' %}">Articles</a>#}
-{#        <a href="{% url 'products' %}">Products</a>#}
-{#        <a href="{% url 'submit_idea' %}">Submit Idea</a>#}
-{#        <a href="{% url 'dashboard' %}">Dashboard</a>#}
-{#        <a href="{% url 'about' %}">About</a>#}
-{#        <a href="{% url 'contact' %}">Contact</a>#}
-{#        {% if user.is_authenticated %}#}
-{#            <a href="{% url 'logout' %}">Logout</a>#}
-{#        {% else %}#}
-{#            <a href="{% url 'login' %}">Login</a>#}
-{#            <a href="{% url 'register' %}">Register</a>#}
-{#        {% endif %}#}
-{#    </nav>#}
-{#{% endblock %}#}
+{% block content %}
+<style>
+    .home-container {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        margin-top: 20px;
+    }
+    .top-section {
+        display: flex;
+        gap: 20px;
+    }
+    .products-section {
+        flex: 7;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    .product-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        padding: 10px;
+        text-align: center;
+        background-color: #f9f9f9;
+    }
+    .product-card img {
+        max-width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+    .articles-section {
+        flex: 3;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .article-preview {
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 10px;
+    }
+    .submit-idea-section {
+        background-color: #e6f2e6;
+        padding: 30px;
+        text-align: center;
+        border-radius: 10px;
+    }
+</style>
 
-    {% block content %}
+<div class="home-container">
 
-        <div class="container">
-        <div class="section">
+    <!-- Top Section: Products and Articles -->
+    <div class="top-section">
+
+        <!-- Products (70%) -->
+        <div class="products-section">
+            {% for product in products|slice:":6" %}
+                <div class="product-card">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.description|truncatewords:10 }}</p>
+                    <p><strong>Added on:</strong> {{ product.created_at|date:"M d, Y" }}</p>
+                </div>
+            {% empty %}
+                <p>No products available.</p>
+            {% endfor %}
+        </div>
+
+        <!-- Articles (30%) -->
+        <div class="articles-section">
             <h2>Latest Articles</h2>
-            <p>Check out our most recent articles on sustainability and green living. <a href="{% url 'articles' %}">Read more</a></p>
+            {% for article in articles|slice:":4" %}
+                <div class="article-preview">
+                    <h4>{{ article.title }}</h4>
+                    <p>{{ article.content|truncatewords:20 }}</p>
+                    <a href="{% url 'article_detail' article.pk %}">Read more</a>
+                </div>
+            {% empty %}
+                <p>No articles available.</p>
+            {% endfor %}
         </div>
 
-        <div class="section">
-            <h2>Featured Products</h2>
-            <p>Explore our curated collection of eco-friendly products. <a href="{% url 'products' %}">Shop now</a></p>
-        </div>
-
-        <div class="section">
-            <h2>Submit Your Ideas</h2>
-            <p>Have an innovative idea to share? We would love to hear it! <a href="{% url 'submit_idea' %}">Submit now</a></p>
-        </div>
     </div>
 
-    {% endblock %}
+    <!-- Submit Idea Section -->
+    <div class="submit-idea-section">
+        <h2>Have an idea to share?</h2>
+        <p>We'd love to hear your innovative green ideas! Join our community and help inspire others.</p>
+        <a href="{% url 'submit_idea' %}" class="btn">Submit Your Idea</a>
+    </div>
 
+</div>
 
-
-    <footer>
-        <p>&copy; 2025 GreenSite. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+{% endblock %}
