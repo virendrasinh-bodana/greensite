@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>My Uploads</h1>
+<ul class="list-group">
+  {% for upload in uploads %}
+    <li class="list-group-item">
+      <a href="{{ upload.file.url }}">{{ upload.file.name }}</a> - {{ upload.uploaded_at|date:"M d, Y H:i" }}
+      <p>{{ upload.description }}</p>
+    </li>
+  {% empty %}
+    <li class="list-group-item">No uploads found.</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'upload_add' %}" class="btn btn-success mt-3">Add Upload</a>
+{% endblock %} 

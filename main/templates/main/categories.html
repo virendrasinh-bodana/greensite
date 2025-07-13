@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Categories</h1>
+<ul class="list-group">
+  {% for category in categories %}
+    <li class="list-group-item">
+      <a href="{% url 'category_detail' category.pk %}">{{ category.name }}</a>
+      <p>{{ category.description }}</p>
+    </li>
+  {% empty %}
+    <li class="list-group-item">No categories found.</li>
+  {% endfor %}
+</ul>
+{% endblock %} 

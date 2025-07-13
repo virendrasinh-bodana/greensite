@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ product.name }}</h1>
+{% if product.image %}
+  <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid mb-3" style="max-width:300px;">
+{% endif %}
+<p>{{ product.description }}</p>
+{% if product.price %}<p><strong>Price:</strong> ${{ product.price }}</p>{% endif %}
+<p><strong>Category:</strong> {{ product.category }}</p>
+<p><strong>Added on:</strong> {{ product.created_at|date:"M d, Y" }}</p>
+<a href="{% url 'products' %}" class="btn btn-secondary mt-3">Back to Products</a>
+{% endblock %} 

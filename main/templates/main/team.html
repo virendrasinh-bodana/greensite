@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Our Team</h1>
+<div class="row">
+  {% for member in team_members %}
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        {% if member.photo %}
+          <img src="{{ member.photo.url }}" class="card-img-top" alt="{{ member.name }}">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ member.name }}</h5>
+          <p class="card-text">{{ member.role }}</p>
+          <a href="{% url 'team_member_detail' member.pk %}" class="btn btn-outline-success">View Profile</a>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <p>No team members found.</p>
+  {% endfor %}
+</div>
+{% endblock %} 

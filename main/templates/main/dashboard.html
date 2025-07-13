@@ -1,26 +1,47 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard - GreenSite</title>
-</head>
-<body>
-    <h1>My Dashboard</h1>
-    <h2>My Ideas</h2>
-    <ul>
-        {% for idea in ideas %}
-            <li>
-                <h3>{{ idea.title }}</h3>
-                <p>{{ idea.description }}</p>
-                {% if idea.image %}
-                    <img src="{{ idea.image.url }}" alt="{{ idea.title }}" width="200">
-                {% endif %}
-                <p>Submitted on {{ idea.created_at|date:"M d, Y" }}</p>
-            </li>
-        {% empty %}
-            <li>No ideas submitted yet.</li>
-        {% endfor %}
+{% extends 'base.html' %}
+{% block content %}
+<h1>My Dashboard</h1>
+
+<div class="row">
+  <div class="col-md-6">
+    <h3>My Uploads</h3>
+    <ul class="list-group mb-3">
+      {% for upload in uploads %}
+        <li class="list-group-item">
+          <a href="{{ upload.file.url }}">{{ upload.file.name }}</a>
+          <span class="text-muted">({{ upload.uploaded_at|date:"M d, Y H:i" }})</span>
+        </li>
+      {% empty %}
+        <li class="list-group-item">No uploads yet.</li>
+      {% endfor %}
     </ul>
-    <a href="{% url 'home' %}">Back to Home</a>
-</body>
-</html>
+    <a href="{% url 'upload_add' %}" class="btn btn-success">Add Upload</a>
+  </div>
+  <div class="col-md-6">
+    <h3>My Reviews</h3>
+    <ul class="list-group mb-3">
+      {% for review in reviews %}
+        <li class="list-group-item">
+          <strong>{{ review.product.name }}</strong>: {{ review.comment }} ({{ review.rating }}/5)
+        </li>
+      {% empty %}
+        <li class="list-group-item">No reviews yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<div class="mt-4">
+  <h3>Visit History</h3>
+  <ul class="list-group">
+    {% for visit in visit_history %}
+      <li class="list-group-item">
+        {{ visit.visit_date }}: {{ visit.visit_count }} visits
+      </li>
+    {% empty %}
+      <li class="list-group-item">No visit history yet.</li>
+    {% endfor %}
+  </ul>
+  <p class="mt-2"><strong>Current session visit count:</strong> {{ visit_count }}</p>
+</div>
+{% endblock %}
