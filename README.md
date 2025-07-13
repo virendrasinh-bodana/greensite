@@ -2,10 +2,10 @@
 
 A collaborative Django web project focused on green/environment-friendly technologies, built by a 5-member team as part of a university course.
 
-## 🌱 Project Description
+##  Project Description
 GreenSite is a platform for sharing and discovering green technologies, eco-friendly products, and environmental news. The site features user authentication, file uploads, search, user history tracking, and more, all styled with Bootstrap for a modern, green-themed look.
 
-## 🚀 Features
+##  Features
 - User authentication: login, logout, forgot password
 - Different interfaces for registered/unregistered users
 - Search bar with dropdown suggestions
@@ -60,16 +60,3 @@ GreenSite is a platform for sharing and discovering green technologies, eco-frie
 - `main/templates/` — All templates (Bootstrap-based)
 - `main/fixtures/initial_data.json` — Initial data
 
-## 🤝 Contribution Guidelines
-- Each member works on their assigned features and submits pull requests for review.
-- All code must be original and written by group members.
-- Weekly meetings to review progress and integrate features.
-- All group members must contribute to views and core logic.
-
-## 📄 Documentation & Presentation
-- Screenshots, code, and a table of group member contributions will be included in the final Word document and PowerPoint presentation.
-- All group members must participate in the oral presentation and Q&A.
-
----
-
-> **Note:** This project is for educational purposes. All code is original and written by the group members as per course requirements. 
