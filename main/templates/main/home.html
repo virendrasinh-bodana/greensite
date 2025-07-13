@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .home-container {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        margin-top: 20px;
+    }
+    .top-section {
+        display: flex;
+        gap: 20px;
+    }
+    .products-section {
+        flex: 7;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    .product-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        padding: 10px;
+        text-align: center;
+        background-color: #f9f9f9;
+    }
+    .product-card img {
+        max-width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+    .articles-section {
+        flex: 3;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .article-preview {
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 10px;
+    }
+    .submit-idea-section {
+        background-color: #e6f2e6;
+        padding: 30px;
+        text-align: center;
+        border-radius: 10px;
+    }
+</style>
+
+<div class="home-container">
+
+    <!-- Top Section: Products and Articles -->
+    <div class="top-section">
+
+        <!-- Products (70%) -->
+        <div class="products-section">
+            {% for product in products|slice:":6" %}
+                <div class="product-card">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.description|truncatewords:10 }}</p>
+                    <p><strong>Added on:</strong> {{ product.created_at|date:"M d, Y" }}</p>
+                </div>
+            {% empty %}
+                <p>No products available.</p>
+            {% endfor %}
+        </div>
+
+        <!-- Articles (30%) -->
+        <div class="articles-section">
+            <h2>Latest Articles</h2>
+            {% for article in articles|slice:":4" %}
+                <div class="article-preview">
+                    <h4>{{ article.title }}</h4>
+                    <p>{{ article.content|truncatewords:20 }}</p>
+                    <a href="{% url 'article_detail' article.pk %}">Read more</a>
+                </div>
+            {% empty %}
+                <p>No articles available.</p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <!-- Submit Idea Section -->
+    <div class="submit-idea-section">
+        <h2>Have an idea to share?</h2>
+        <p>We'd love to hear your innovative green ideas! Join our community and help inspire others.</p>
+        <a href="{% url 'submit_idea' %}" class="btn">Submit Your Idea</a>
+    </div>
+
+</div>
+
+{% endblock %}

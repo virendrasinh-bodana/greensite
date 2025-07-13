@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Articles - GreenSite</title>
+</head>
+<body>
+
+{% block content %}
+     <h1>Articles</h1>
+    <ul>
+        {% for article in object_list %}
+            <li><a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a> ({{ article.created_at|date:"M d, Y" }})</li>
+        {% empty %}
+            <li>No articles available.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'home' %}">Back to Home</a>
+
+{% endblock %}
+
+</body>
+</html>

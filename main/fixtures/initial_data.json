@@ -4,8 +4,89 @@
         "pk": 1,
         "fields": {
             "title": "How to Reduce Plastic Use",
-            "content": "Practical tips on reducing plastic...",
+            "content": "Practical tips on reducing plastic waste at home and in your community.",
             "created_at": "2024-07-13T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.article",
+        "pk": 2,
+        "fields": {
+            "title": "Sustainable Gardening Basics",
+            "content": "Learn how to create a thriving, eco-friendly garden using compost and native plants.",
+            "created_at": "2024-07-14T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.article",
+        "pk": 3,
+        "fields": {
+            "title": "Benefits of Plant-Based Diets",
+            "content": "Explore health and environmental advantages of shifting to a plant-based diet.",
+            "created_at": "2024-07-15T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.article",
+        "pk": 4,
+        "fields": {
+            "title": "DIY Natural Cleaning Products",
+            "content": "Make your own eco-friendly cleaning products using simple, safe ingredients.",
+            "created_at": "2024-07-16T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.article",
+        "pk": 5,
+        "fields": {
+            "title": "Water Conservation at Home",
+            "content": "Tips to reduce water consumption and lower your utility bills.",
+            "created_at": "2024-07-17T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.article",
+        "pk": 6,
+        "fields": {
+            "title": "The Power of Upcycling",
+            "content": "Discover creative ways to repurpose household items and reduce waste.",
+            "created_at": "2024-07-18T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.article",
+        "pk": 7,
+        "fields": {
+            "title": "Switching to Green Energy",
+            "content": "Find out how to switch to renewable energy sources for your home.",
+            "created_at": "2024-07-19T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.article",
+        "pk": 8,
+        "fields": {
+            "title": "Zero-Waste Lifestyle Tips",
+            "content": "Beginner-friendly tips to start living a zero-waste lifestyle.",
+            "created_at": "2024-07-20T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.article",
+        "pk": 9,
+        "fields": {
+            "title": "Community Gardening Projects",
+            "content": "How to start and maintain a community garden to strengthen local ties.",
+            "created_at": "2024-07-21T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.article",
+        "pk": 10,
+        "fields": {
+            "title": "Sustainable Fashion Choices",
+            "content": "Guide to choosing clothes that are eco-friendly and ethically made.",
+            "created_at": "2024-07-22T10:00:00Z"
         }
     },
     {
@@ -13,9 +94,99 @@
         "pk": 1,
         "fields": {
             "name": "Solar Lantern",
-            "description": "A lantern powered by solar energy.",
+            "description": "A lantern powered by solar energy, perfect for camping and outdoor use.",
             "image": "products/solar_lantern.jpg",
             "created_at": "2024-07-13T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 2,
+        "fields": {
+            "name": "Reusable Bamboo Cutlery Set",
+            "description": "A lightweight, eco-friendly cutlery set to replace single-use plastic.",
+            "image": "products/bamboo_cutlery.jpg",
+            "created_at": "2024-07-14T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 3,
+        "fields": {
+            "name": "Compost Bin",
+            "description": "Compact compost bin designed for indoor or balcony use.",
+            "image": "products/compost_bin.jpg",
+            "created_at": "2024-07-15T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 4,
+        "fields": {
+            "name": "Organic Cotton Tote Bag",
+            "description": "A durable and washable tote bag made from 100% organic cotton.",
+            "image": "products/cotton_tote.jpg",
+            "created_at": "2024-07-16T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 5,
+        "fields": {
+            "name": "Beeswax Food Wraps",
+            "description": "Reusable wraps to keep food fresh without plastic waste.",
+            "image": "products/beeswax_wraps.jpg",
+            "created_at": "2024-07-17T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 6,
+        "fields": {
+            "name": "Water-Saving Shower Head",
+            "description": "An efficient shower head that reduces water usage by up to 40%.",
+            "image": "products/shower_head.jpg",
+            "created_at": "2024-07-18T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 7,
+        "fields": {
+            "name": "Recycled Notebook",
+            "description": "Notebook made from 100% recycled paper for eco-friendly note-taking.",
+            "image": "products/recycled_notebook.jpg",
+            "created_at": "2024-07-19T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 8,
+        "fields": {
+            "name": "Plant-Based Cleaning Spray",
+            "description": "A non-toxic, biodegradable cleaning spray safe for all surfaces.",
+            "image": "products/cleaning_spray.jpg",
+            "created_at": "2024-07-20T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 9,
+        "fields": {
+            "name": "Portable Solar Charger",
+            "description": "Charge your devices on the go using renewable solar energy.",
+            "image": "products/solar_charger.jpg",
+            "created_at": "2024-07-21T10:00:00Z"
+        }
+    },
+    {
+        "model": "main.product",
+        "pk": 10,
+        "fields": {
+            "name": "Eco-Friendly Yoga Mat",
+            "description": "Non-slip yoga mat made from natural, biodegradable materials.",
+            "image": "products/yoga_mat.jpg",
+            "created_at": "2024-07-22T10:00:00Z"
         }
     }
 ]

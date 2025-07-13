@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ object.title }} - GreenSite</title>
+</head>
+<body>
+{% block content %}
+    <h1>{{ object.title }}</h1>
+    <p>{{ object.content }}</p>
+    <p>Published on {{ object.created_at|date:"M d, Y" }}</p>
+    <a href="{% url 'articles' %}">Back to Articles</a>
+
+{% endblock %}
+</body>
+</html>
