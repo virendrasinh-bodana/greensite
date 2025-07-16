@@ -5,7 +5,8 @@
         "fields": {
             "title": "How to Reduce Plastic Use",
             "content": "Practical tips on reducing plastic waste at home and in your community.",
-            "created_at": "2024-07-13T10:00:00Z"
+            "created_at": "2024-07-13T10:00:00Z",
+            "updated_at": "2024-07-13T10:00:00Z"
         }
     },
     {
@@ -14,7 +15,8 @@
         "fields": {
             "title": "Sustainable Gardening Basics",
             "content": "Learn how to create a thriving, eco-friendly garden using compost and native plants.",
-            "created_at": "2024-07-14T10:00:00Z"
+            "created_at": "2024-07-14T10:00:00Z",
+            "updated_at": "2024-07-14T10:00:00Z"
         }
     },
     {
@@ -23,7 +25,8 @@
         "fields": {
             "title": "Benefits of Plant-Based Diets",
             "content": "Explore health and environmental advantages of shifting to a plant-based diet.",
-            "created_at": "2024-07-15T10:00:00Z"
+            "created_at": "2024-07-15T10:00:00Z",
+            "updated_at": "2024-07-15T10:00:00Z"
         }
     },
     {
@@ -32,7 +35,8 @@
         "fields": {
             "title": "DIY Natural Cleaning Products",
             "content": "Make your own eco-friendly cleaning products using simple, safe ingredients.",
-            "created_at": "2024-07-16T10:00:00Z"
+            "created_at": "2024-07-16T10:00:00Z",
+            "updated_at": "2024-07-16T10:00:00Z"
         }
     },
     {
@@ -41,7 +45,8 @@
         "fields": {
             "title": "Water Conservation at Home",
             "content": "Tips to reduce water consumption and lower your utility bills.",
-            "created_at": "2024-07-17T10:00:00Z"
+            "created_at": "2024-07-17T10:00:00Z",
+            "updated_at": "2024-07-17T10:00:00Z"
         }
     },
     {
@@ -50,7 +55,8 @@
         "fields": {
             "title": "The Power of Upcycling",
             "content": "Discover creative ways to repurpose household items and reduce waste.",
-            "created_at": "2024-07-18T10:00:00Z"
+            "created_at": "2024-07-18T10:00:00Z",
+            "updated_at": "2024-07-18T10:00:00Z"
         }
     },
     {
@@ -59,7 +65,8 @@
         "fields": {
             "title": "Switching to Green Energy",
             "content": "Find out how to switch to renewable energy sources for your home.",
-            "created_at": "2024-07-19T10:00:00Z"
+            "created_at": "2024-07-19T10:00:00Z",
+            "updated_at": "2024-07-19T10:00:00Z"
         }
     },
     {
@@ -68,7 +75,8 @@
         "fields": {
             "title": "Zero-Waste Lifestyle Tips",
             "content": "Beginner-friendly tips to start living a zero-waste lifestyle.",
-            "created_at": "2024-07-20T10:00:00Z"
+            "created_at": "2024-07-20T10:00:00Z",
+            "updated_at": "2024-07-20T10:00:00Z"
         }
     },
     {
@@ -77,7 +85,8 @@
         "fields": {
             "title": "Community Gardening Projects",
             "content": "How to start and maintain a community garden to strengthen local ties.",
-            "created_at": "2024-07-21T10:00:00Z"
+            "created_at": "2024-07-21T10:00:00Z",
+            "updated_at": "2024-07-21T10:00:00Z"
         }
     },
     {
@@ -86,7 +95,8 @@
         "fields": {
             "title": "Sustainable Fashion Choices",
             "content": "Guide to choosing clothes that are eco-friendly and ethically made.",
-            "created_at": "2024-07-22T10:00:00Z"
+            "created_at": "2024-07-22T10:00:00Z",
+            "updated_at": "2024-07-22T10:00:00Z"
         }
     },
     {

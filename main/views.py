@@ -193,3 +193,7 @@ def search(request):
     articles = Article.objects.filter(title__icontains=query) if query else []
     products = Product.objects.filter(name__icontains=query) if query else []
     return render(request, 'main/search_results.html', {'articles': articles, 'products': products, 'query': query})
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
