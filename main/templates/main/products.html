@@ -1,30 +1,35 @@
 {% extends 'base.html' %}
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Products - GreenSite</title>
-</head>
-<body>
 
 {% block content %}
-    <h1>Our Products</h1>
-    <ul>
-        {% for product in products %}
-            <li>
-                <h2>{{ product.name }}</h2>
-                <p>{{ product.description }}</p>
+<h1 class="mb-4">Our Products</h1>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+    {% for product in products %}
+        <div class="col">
+            <div class="card h-100 shadow-sm rounded-4 border-0 product-tile" style="transition: transform 0.2s;">
                 {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200">
+                    <img src="{{ product.image.url }}" class="card-img-top rounded-top-4" alt="{{ product.name }}" style="object-fit: cover; height: 220px;">
                 {% endif %}
-                <p>Added on {{ product.created_at|date:"M d, Y" }}</p>
-            </li>
-        {% empty %}
-            <li>No products available.</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'home' %}">Back to Home</a>
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                </div>
+                <div class="card-footer bg-white border-0">
+                    <small class="text-muted">Added on {{ product.created_at|date:"M d, Y" }}</small>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="col">
+            <div class="alert alert-info w-100">No products available.</div>
+        </div>
+    {% endfor %}
+</div>
+<a href="{% url 'home' %}" class="btn btn-outline-success mt-4">Back to Home</a>
 
+<style>
+.product-tile:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+</style>
 {% endblock %}
-</body>
-</html>
