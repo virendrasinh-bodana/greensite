@@ -1,12 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Article, Product, Review, UserProfile, VisitHistory, TeamMember, ContactMessage, Event, Upload, Category
-from .forms import RegisterForm, ProductForm, ReviewForm, UserProfileForm, TeamMemberForm, ContactMessageForm, EventForm, UploadForm, CategoryForm
+from .models import Article, Product, Review, UserProfile, VisitHistory, ContactMessage, Upload, Category
+from .forms import RegisterForm, ProductForm, ReviewForm, UserProfileForm,ContactMessageForm, UploadForm, CategoryForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import HttpResponse
 
 
 # Home page — show articles and products
@@ -17,11 +18,12 @@ def home(request):
     # User history tracking
     visit_count = request.session.get('visit_count', 0)
     request.session['visit_count'] = visit_count + 1
-
+    cart = request.session.get('cart', {})
     return render(request, 'main/home.html', {
         'articles': articles,
         'products': products,
         'visit_count': visit_count,
+        'cart': cart,
     })
 
 
@@ -42,7 +44,8 @@ class ArticleDetailView(DetailView):
 # Product listing
 def product_list(request):
     products = Product.objects.all()
-    return render(request, 'main/products.html', {'products': products})
+    cart = request.session.get('cart', {})
+    return render(request, 'main/products.html', {'products': products, 'cart': cart})
 
 
 # Product detail view
@@ -99,16 +102,16 @@ def profile(request):
         form = UserProfileForm(instance=profile)
     return render(request, 'main/profile.html', {'form': form})
 
-# TeamMember list and detail
-class TeamMemberListView(ListView):
-    model = TeamMember
-    template_name = 'main/team.html'
-    context_object_name = 'team_members'
+# # TeamMember list and detail
+# class TeamMemberListView(ListView):
+#     model = TeamMember
+#     template_name = 'main/team.html'
+#     context_object_name = 'team_members'
 
-class TeamMemberDetailView(DetailView):
-    model = TeamMember
-    template_name = 'main/team_member_detail.html'
-    context_object_name = 'member'
+# class TeamMemberDetailView(DetailView):
+#     model = TeamMember
+#     template_name = 'main/team_member_detail.html'
+#     context_object_name = 'member'
 
 # ContactMessage create view
 class ContactMessageCreateView(CreateView):
@@ -117,22 +120,22 @@ class ContactMessageCreateView(CreateView):
     template_name = 'main/contact_form.html'
     success_url = reverse_lazy('home')
 
-# Event list and detail
-class EventListView(ListView):
-    model = Event
-    template_name = 'main/events.html'
-    context_object_name = 'events'
+# # Event list and detail
+# class EventListView(ListView):
+#     model = Event
+#     template_name = 'main/events.html'
+#     context_object_name = 'events'
 
-class EventDetailView(DetailView):
-    model = Event
-    template_name = 'main/event_detail.html'
-    context_object_name = 'event'
+# class EventDetailView(DetailView):
+#     model = Event
+#     template_name = 'main/event_detail.html'
+#     context_object_name = 'event'
 
-class EventCreateView(LoginRequiredMixin, CreateView):
-    model = Event
-    form_class = EventForm
-    template_name = 'main/event_form.html'
-    success_url = reverse_lazy('events')
+# class EventCreateView(LoginRequiredMixin, CreateView):
+#     model = Event
+#     form_class = EventForm
+#     template_name = 'main/event_form.html'
+#     success_url = reverse_lazy('events')
 
 # Upload create and list
 class UploadCreateView(LoginRequiredMixin, CreateView):
@@ -197,3 +200,33 @@ def search(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+def add_to_cart(request, product_id):
+    if request.method == 'POST':
+        cart = request.session.get('cart', {})
+        cart[str(product_id)] = cart.get(str(product_id), 0) + 1
+        request.session['cart'] = cart
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return HttpResponse(status=200)
+    return redirect('cart')
+
+
+def remove_from_cart(request, product_id):
+    cart = request.session.get('cart', {})
+    if str(product_id) in cart:
+        del cart[str(product_id)]
+        request.session['cart'] = cart
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return HttpResponse(status=200)
+    return redirect('cart')
+
+
+def cart_view(request):
+    cart = request.session.get('cart', {})
+    products = []
+    total = 0
+    for product_id, quantity in cart.items():
+        product = get_object_or_404(Product, pk=product_id)
+        products.append({'product': product, 'quantity': quantity, 'subtotal': product.price * quantity if product.price else 0})
+        total += product.price * quantity if product.price else 0
+    return render(request, 'main/cart.html', {'cart_items': products, 'total': total})

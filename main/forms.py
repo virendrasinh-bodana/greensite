@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Category, Article, Product, Review, UserProfile, VisitHistory, TeamMember, ContactMessage, Event, Upload
+from .models import Category, Article, Product, Review, UserProfile, VisitHistory, ContactMessage,Upload
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField()
@@ -39,20 +39,20 @@ class VisitHistoryForm(forms.ModelForm):
         model = VisitHistory
         fields = ['user', 'session_key', 'visit_count']
 
-class TeamMemberForm(forms.ModelForm):
-    class Meta:
-        model = TeamMember
-        fields = ['name', 'role', 'bio', 'photo']
+# class TeamMemberForm(forms.ModelForm):
+#     class Meta:
+#         model = TeamMember
+#         fields = ['name', 'role', 'bio', 'photo']
 
 class ContactMessageForm(forms.ModelForm):
     class Meta:
         model = ContactMessage
         fields = ['name', 'email', 'subject', 'message']
 
-class EventForm(forms.ModelForm):
-    class Meta:
-        model = Event
-        fields = ['title', 'description', 'date', 'location', 'organizer']
+# class EventForm(forms.ModelForm):
+#     class Meta:
+#         model = Event
+#         fields = ['title', 'description', 'date', 'location', 'organizer']
 
 class UploadForm(forms.ModelForm):
     class Meta:

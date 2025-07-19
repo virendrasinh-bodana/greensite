@@ -20,16 +20,26 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
             </ul>
-            <form class="d-flex" method="get" action="{% url 'search' %}">
-                <input class="form-control me-2" type="search" name="q" placeholder="Search...">
-                <button class="btn btn-light" type="submit">Search</button>
-            </form>
+
+
+            <!-- Cart icon added -->
+            <a href="{% url 'cart' %}" class="btn btn-outline-light position-relative ms-2">
+                <i class="bi bi-cart"></i>
+                {% if request.session.cart %}
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ request.session.cart|length }}
+                    </span>
+                {% endif %}
+            </a>
+            
+            <!-- Search bar and cart icon removed -->
             {% if user.is_authenticated %}
                 <a class="btn btn-outline-danger ms-2" href="{% url 'logout' %}">Logout</a>
             {% else %}
                 <a class="btn btn-outline-primary ms-2" href="{% url 'login' %}">Login</a>
                 <a class="btn btn-outline-secondary ms-2" href="{% url 'register' %}">Register</a>
             {% endif %}
+            
         </div>
     </nav>
 {% endblock %}

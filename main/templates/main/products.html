@@ -7,11 +7,19 @@
         <div class="col">
             <div class="card h-100 shadow-sm rounded-4 border-0 product-tile" style="transition: transform 0.2s;">
                 {% if product.image %}
-                    <img src="{{ product.image.url }}" class="card-img-top rounded-top-4" alt="{{ product.name }}" style="object-fit: cover; height: 220px;">
+                    <img src="{{ product.image.url }}" class="card-img-top rounded-top-4 product-image" alt="{{ product.name }}">
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5>
                     <p class="card-text">{{ product.description }}</p>
+                    {% if product.id|stringformat:"s" in cart %}
+                        <button class="btn btn-secondary btn-sm mt-2" disabled>Added to Cart</button>
+                    {% else %}
+                        <form class="add-to-cart-form" data-product-id="{{ product.id }}" method="post" action="{% url 'add_to_cart' product.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success btn-sm mt-2">Add to Cart</button>
+                        </form>
+                    {% endif %}
                 </div>
                 <div class="card-footer bg-white border-0">
                     <small class="text-muted">Added on {{ product.created_at|date:"M d, Y" }}</small>
@@ -31,5 +39,51 @@
     transform: translateY(-6px) scale(1.03);
     box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
+.product-image {
+    object-fit: contain;
+    width: 100%;
+    max-height: 220px;
+    background: #f8f9fa;
+    display: block;
+}
 </style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.add-to-cart-form').forEach(function(form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var productId = form.getAttribute('data-product-id');
+            var url = form.getAttribute('action');
+            var csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            }).then(function(response) {
+                if (response.ok) {
+                    var btn = form.querySelector('button[type=submit]');
+                    btn.textContent = 'Added to Cart';
+                    btn.classList.remove('btn-success');
+                    btn.classList.add('btn-secondary');
+                    btn.disabled = true;
+                }
+            });
+        });
+    });
+    // Listen for cart update events to re-enable buttons
+    window.addEventListener('cart-updated', function(e) {
+        var productId = e.detail.productId;
+        var form = document.querySelector('.add-to-cart-form[data-product-id="' + productId + '"]');
+        if (form) {
+            var btn = form.querySelector('button[type=submit]');
+            btn.textContent = 'Add to Cart';
+            btn.classList.remove('btn-secondary');
+            btn.classList.add('btn-success');
+            btn.disabled = false;
+        }
+    });
+});
+</script>
 {% endblock %}
