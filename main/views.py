@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Article, Product, Review, UserProfile, VisitHistory, ContactMessage, Upload, Category
-from .forms import RegisterForm, ProductForm, ReviewForm, UserProfileForm,ContactMessageForm, UploadForm, CategoryForm
+from .forms import RegisterForm, ProductForm, ReviewForm, UserProfileForm,ContactMessageForm, UploadForm, CategoryForm, ArticleForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, authenticate, logout
@@ -208,7 +208,7 @@ def add_to_cart(request, product_id):
         request.session['cart'] = cart
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             return HttpResponse(status=200)
-    return redirect('cart')
+    return redirect('home')
 
 
 def remove_from_cart(request, product_id):
@@ -230,3 +230,10 @@ def cart_view(request):
         products.append({'product': product, 'quantity': quantity, 'subtotal': product.price * quantity if product.price else 0})
         total += product.price * quantity if product.price else 0
     return render(request, 'main/cart.html', {'cart_items': products, 'total': total})
+
+# Article create view
+class ArticleCreateView(LoginRequiredMixin, CreateView):
+    model = Article
+    form_class = ArticleForm
+    template_name = 'main/article_form.html'
+    success_url = reverse_lazy('articles')

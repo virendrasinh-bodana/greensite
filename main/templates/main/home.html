@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <style>
@@ -13,14 +14,22 @@
         display: flex;
         flex-direction: column;
         gap: 40px;
-        margin-top: 30px;
+        margin-top: 0px;
     }
     
     /* Hero Section */
     .hero-section {
-        background: linear-gradient(135deg, rgba(33, 136, 56, 0.1), rgba(32, 201, 151, 0.1));
+        background: linear-gradient(135deg, rgba(33, 136, 56, 0.1), rgba(32, 201, 151, 0.1)), url("{% static 'main/eco.avif' %}");
+        background-size: cover;
+        background-position: center;
         border-radius: 15px;
-        padding: 30px;
+        padding: 60px 0; /* double the vertical padding */
+        min-height: 400px; /* ensure at least double the previous height */
+        width: 100vw;
+        max-width: 100vw;
+        margin-left: 50%;
+        margin-top: -3%;
+        transform: translateX(-50%);
         text-align: center;
         position: relative;
         overflow: hidden;
@@ -383,7 +392,7 @@
                             {% if product.id|stringformat:"s" in cart %}
                                 <button class="btn btn-secondary btn-sm mt-2" disabled>Added to Cart</button>
                             {% else %}
-                                <form class="add-to-cart-form" data-product-id="{{ product.id }}" method="post" action="{% url 'add_to_cart' product.id %}">
+                                <form method="post" action="{% url 'add_to_cart' product.id %}">
                                     {% csrf_token %}
                                     <button type="submit" class="btn btn-success btn-sm mt-2">Add to Cart</button>
                                 </form>
@@ -423,44 +432,5 @@
     </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.add-to-cart-form').forEach(function(form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            var productId = form.getAttribute('data-product-id');
-            var url = form.getAttribute('action');
-            var csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': csrfToken,
-                    'X-Requested-With': 'XMLHttpRequest',
-                },
-            }).then(function(response) {
-                if (response.ok) {
-                    var btn = form.querySelector('button[type=submit]');
-                    btn.textContent = 'Added to Cart';
-                    btn.classList.remove('btn-success');
-                    btn.classList.add('btn-secondary');
-                    btn.disabled = true;
-                }
-            });
-        });
-    });
-    // Listen for cart update events to re-enable buttons
-    window.addEventListener('cart-updated', function(e) {
-        var productId = e.detail.productId;
-        var form = document.querySelector('.add-to-cart-form[data-product-id="' + productId + '"]');
-        if (form) {
-            var btn = form.querySelector('button[type=submit]');
-            btn.textContent = 'Add to Cart';
-            btn.classList.remove('btn-secondary');
-            btn.classList.add('btn-success');
-            btn.disabled = false;
-        }
-    });
-});
-</script>
 
 {% endblock %}
