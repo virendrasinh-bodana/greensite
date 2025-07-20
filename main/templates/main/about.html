@@ -1,18 +1,59 @@
 {% extends 'base.html' %}
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>About Us - GreenSite</title>
-</head>
-<body>
 {% block content %}
-
-
-    <h1>About GreenSite</h1>
-    <p>We are committed to promoting eco-friendly ideas and products to build a greener future.</p>
-    <a href="{% url 'home' %}">Back to Home</a>
-
+<div class="container py-5">
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-8 text-center">
+            <h1 class="display-4 mb-3">About GreenSite</h1>
+            <p class="lead">GreenSite is your community hub for eco-friendly living, sustainable products, and green innovation. Our mission is to inspire and empower individuals to make choices that benefit both people and the planet.</p>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h3 class="card-title">Our Vision</h3>
+                    <p class="card-text">We envision a world where sustainable living is accessible and enjoyable for everyone. GreenSite connects you with innovative products, practical tips, and a vibrant community dedicated to making a positive impact on the environment.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h3 class="card-title">What We Offer</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Curated eco-friendly products</li>
+                        <li class="list-group-item">Inspiring articles and guides</li>
+                        <li class="list-group-item">Community events and workshops</li>
+                        <li class="list-group-item">A platform to share your green ideas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card border-success">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Upcoming & Recent GreenSite Events</h4>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <strong>Eco Fair 2024</strong> &mdash; Join us for a day of green innovation, local vendors, and hands-on workshops. <span class="badge bg-success">July 28</span>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Community Clean-Up Drive</strong> &mdash; Help us make our city greener by participating in our monthly clean-up event. <span class="badge bg-success">Every 1st Saturday</span>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Green Living Webinar Series</strong> &mdash; Learn from experts about sustainable habits and eco-friendly technologies. <span class="badge bg-success">Ongoing</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <a href="{% url 'home' %}" class="btn btn-outline-success btn-lg">Back to Home</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
-</body>
-</html>
