@@ -23,14 +23,14 @@
         background-size: cover;
         background-position: center;
         border-radius: 15px;
-        padding: 60px 0; /* double the vertical padding */
+        padding: 60px 10px; /* double the vertical padding */
         min-height: 400px; /* ensure at least double the previous height */
         width: 100vw;
         max-width: 100vw;
         margin-left: 50%;
         margin-top: -3%;
         transform: translateX(-50%);
-        text-align: center;
+        text-align: left;
         position: relative;
         overflow: hidden;
     }
@@ -49,15 +49,16 @@
         font-size: 2rem;
         color: #2c3e50;
         margin-bottom: 15px;
+        margin-left: 10px;
         font-weight: 700;
     }
     
     .hero-section p {
         font-size: 1rem;
-        color: #6c757d;
+        color: #363b3f;
         margin-bottom: 20px;
         max-width: 600px;
-        margin-left: auto;
+        margin-left: 10px;
         margin-right: auto;
     }
     
@@ -388,6 +389,7 @@
                         <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
                         <div class="product-info">
                             <h3>{{ product.name }}</h3>
+                            <p class="fw-bold text-success mb-1">${{ product.price }}</p>
                             <p>{{ product.description|truncatewords:10 }}</p>
                             <div class="product-date">{{ product.created_at|date:"M d, Y" }}</div>
                             {% if product.id|stringformat:"s" in cart %}

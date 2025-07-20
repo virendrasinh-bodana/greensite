@@ -106,7 +106,8 @@
             "name": "Solar Lantern",
             "description": "A lantern powered by solar energy, perfect for camping and outdoor use.",
             "image": "products/solar_lantern.jpg",
-            "created_at": "2024-07-13T10:00:00Z"
+            "created_at": "2024-07-13T10:00:00Z",
+            "price": "29.99"
         }
     },
     {
@@ -116,7 +117,8 @@
             "name": "Reusable Bamboo Cutlery Set",
             "description": "A lightweight, eco-friendly cutlery set to replace single-use plastic.",
             "image": "products/bamboo_cutlery.jpg",
-            "created_at": "2024-07-14T10:00:00Z"
+            "created_at": "2024-07-14T10:00:00Z",
+            "price": "12.99"
         }
     },
     {
@@ -126,7 +128,8 @@
             "name": "Compost Bin",
             "description": "Compact compost bin designed for indoor or balcony use.",
             "image": "products/compost_bin.jpg",
-            "created_at": "2024-07-15T10:00:00Z"
+            "created_at": "2024-07-15T10:00:00Z",
+            "price": "24.99"
         }
     },
     {
@@ -136,7 +139,8 @@
             "name": "Organic Cotton Tote Bag",
             "description": "A durable and washable tote bag made from 100% organic cotton.",
             "image": "products/cotton_tote.jpg",
-            "created_at": "2024-07-16T10:00:00Z"
+            "created_at": "2024-07-16T10:00:00Z",
+            "price": "15.99"
         }
     },
     {
@@ -146,7 +150,8 @@
             "name": "Beeswax Food Wraps",
             "description": "Reusable wraps to keep food fresh without plastic waste.",
             "image": "products/beeswax_wraps.jpg",
-            "created_at": "2024-07-17T10:00:00Z"
+            "created_at": "2024-07-17T10:00:00Z",
+            "price": "10.99"
         }
     },
     {
@@ -156,7 +161,8 @@
             "name": "Water-Saving Shower Head",
             "description": "An efficient shower head that reduces water usage by up to 40%.",
             "image": "products/shower_head.jpg",
-            "created_at": "2024-07-18T10:00:00Z"
+            "created_at": "2024-07-18T10:00:00Z",
+            "price": "34.99"
         }
     },
     {
@@ -166,7 +172,8 @@
             "name": "Recycled Notebook",
             "description": "Notebook made from 100% recycled paper for eco-friendly note-taking.",
             "image": "products/recycled_notebook.jpg",
-            "created_at": "2024-07-19T10:00:00Z"
+            "created_at": "2024-07-19T10:00:00Z",
+            "price": "7.99"
         }
     },
     {
@@ -176,7 +183,8 @@
             "name": "Plant-Based Cleaning Spray",
             "description": "A non-toxic, biodegradable cleaning spray safe for all surfaces.",
             "image": "products/cleaning_spray.jpg",
-            "created_at": "2024-07-20T10:00:00Z"
+            "created_at": "2024-07-20T10:00:00Z",
+            "price": "8.99"
         }
     },
     {
@@ -186,7 +194,8 @@
             "name": "Portable Solar Charger",
             "description": "Charge your devices on the go using renewable solar energy.",
             "image": "products/solar_charger.jpg",
-            "created_at": "2024-07-21T10:00:00Z"
+            "created_at": "2024-07-21T10:00:00Z",
+            "price": "39.99"
         }
     },
     {
@@ -196,7 +205,8 @@
             "name": "Eco-Friendly Yoga Mat",
             "description": "Non-slip yoga mat made from natural, biodegradable materials.",
             "image": "products/yoga_mat.jpg",
-            "created_at": "2024-07-22T10:00:00Z"
+            "created_at": "2024-07-22T10:00:00Z",
+            "price": "22.99"
         }
     }
 ]
