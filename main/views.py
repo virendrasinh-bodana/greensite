@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Article, Product, Review, UserProfile, VisitHistory, ContactMessage, Upload, Category
+from .models import Article, Product, Review, UserProfile, VisitHistory, ContactMessage, Upload, Category, Event
 from .forms import RegisterForm, ProductForm, ReviewForm, UserProfileForm,ContactMessageForm, UploadForm, CategoryForm, ArticleForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -121,10 +121,10 @@ class ContactMessageCreateView(CreateView):
     success_url = reverse_lazy('home')
 
 # # Event list and detail
-# class EventListView(ListView):
-#     model = Event
-#     template_name = 'main/events.html'
-#     context_object_name = 'events'
+class EventListView(ListView):
+    model = Event
+    template_name = 'main/events.html'
+    context_object_name = 'events'
 
 # class EventDetailView(DetailView):
 #     model = Event

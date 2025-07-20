@@ -15,7 +15,7 @@
                     {% if product.id|stringformat:"s" in cart %}
                         <button class="btn btn-secondary btn-sm mt-2" disabled>Added to Cart</button>
                     {% else %}
-                        <form class="add-to-cart-form" data-product-id="{{ product.id }}" method="post" action="{% url 'add_to_cart' product.id %}">
+                        <form method="post" action="{% url 'add_to_cart' product.id %}">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-success btn-sm mt-2">Add to Cart</button>
                         </form>
@@ -47,43 +47,5 @@
     display: block;
 }
 </style>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.add-to-cart-form').forEach(function(form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            var productId = form.getAttribute('data-product-id');
-            var url = form.getAttribute('action');
-            var csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': csrfToken,
-                    'X-Requested-With': 'XMLHttpRequest',
-                },
-            }).then(function(response) {
-                if (response.ok) {
-                    var btn = form.querySelector('button[type=submit]');
-                    btn.textContent = 'Added to Cart';
-                    btn.classList.remove('btn-success');
-                    btn.classList.add('btn-secondary');
-                    btn.disabled = true;
-                }
-            });
-        });
-    });
-    // Listen for cart update events to re-enable buttons
-    window.addEventListener('cart-updated', function(e) {
-        var productId = e.detail.productId;
-        var form = document.querySelector('.add-to-cart-form[data-product-id="' + productId + '"]');
-        if (form) {
-            var btn = form.querySelector('button[type=submit]');
-            btn.textContent = 'Add to Cart';
-            btn.classList.remove('btn-secondary');
-            btn.classList.add('btn-success');
-            btn.disabled = false;
-        }
-    });
-});
-</script>
+
 {% endblock %}
