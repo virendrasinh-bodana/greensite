@@ -15,11 +15,25 @@ class CategoryForm(forms.ModelForm):
         fields = ['name', 'description']
 
 class ArticleForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+        if 'content' in self.fields:
+            self.fields['content'].widget.attrs['rows'] = 10
+            self.fields['content'].widget.attrs['style'] = 'resize:vertical;'
     class Meta:
         model = Article
         fields = ['title', 'content', 'category']
 
 class ProductForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+        if 'description' in self.fields:
+            self.fields['description'].widget.attrs['rows'] = 5
+            self.fields['description'].widget.attrs['style'] = 'resize:vertical;'
     class Meta:
         model = Product
         fields = ['name', 'description', 'category', 'price', 'image']
