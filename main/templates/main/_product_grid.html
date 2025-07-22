@@ -1,0 +1,27 @@
+{% for product in products %}
+    <div class="product-card">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+        <div class="product-info">
+            <h3>{{ product.name }}</h3>
+            <p class="fw-bold text-success mb-1">${{ product.price }}</p>
+            <p>{{ product.description|truncatewords:10 }}</p>
+            <div class="product-date">{{ product.created_at|date:"M d, Y" }}</div>
+            {% if product.id|stringformat:"s" in cart %}
+                <button class="btn btn-secondary btn-sm mt-2" disabled>Added to Cart</button>
+            {% else %}
+                {% if user.is_authenticated %}
+                <form method="post" action="{% url 'add_to_cart' product.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success btn-sm mt-2">Add to Cart</button>
+                </form>
+                {% else %}
+                <button type="button" class="btn btn-success btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#loginRequiredModal">Add to Cart</button>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% empty %}
+    <div class="empty-state">
+        <p>No products available yet. Check back soon!</p>
+    </div>
+{% endfor %} 

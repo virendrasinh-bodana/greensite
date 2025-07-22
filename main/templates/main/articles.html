@@ -7,7 +7,7 @@
   <button class="btn btn-outline-success" type="submit">Search</button>
 </form>
 <a href="{% url 'article_add' %}" class="btn btn-success mb-4"{% if not user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#loginRequiredModal" onclick="return false;"{% endif %}>Write an Article</a>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+<div class="articles-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
     {% for article in object_list %}
         <div class="col">
             <div class="card h-100 shadow-sm rounded-4 border-0 article-tile" style="transition: transform 0.2s;">
@@ -29,6 +29,26 @@
         </div>
     {% endfor %}
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.querySelector('input[name="q"]');
+    const articleGrid = document.querySelector('.articles-grid');
+    let debounceTimeout;
+    if (searchInput && articleGrid) {
+        searchInput.addEventListener('input', function() {
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => {
+                const query = searchInput.value;
+                fetch(`/ajax/article-search/?q=${encodeURIComponent(query)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        articleGrid.innerHTML = data.html;
+                    });
+            }, 250); // Debounce for 250ms
+        });
+    }
+});
+</script>
 <a href="{% url 'home' %}" class="btn btn-outline-success mt-4">Back to Home</a>
 
 <style>

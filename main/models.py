@@ -94,3 +94,13 @@ class Upload(models.Model):
 
     def __str__(self):
         return f"{self.user or 'Anonymous'} - {self.file.name}"
+
+class Idea(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    file = models.FileField(upload_to='idea_uploads/', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.title} by {self.user.username}"

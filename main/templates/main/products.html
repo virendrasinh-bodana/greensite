@@ -11,7 +11,7 @@
 {% else %}
     <a href="#" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#loginRequiredModal">Sell Product</a>
 {% endif %}
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+<div class="products-grid row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
     {% for product in products %}
         <div class="col">
             <div class="card h-100 shadow-sm rounded-4 border-0 product-tile" style="transition: transform 0.2s;">
@@ -61,5 +61,26 @@
     display: block;
 }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.querySelector('input[name="q"]');
+    const productGrid = document.querySelector('.products-grid');
+    let debounceTimeout;
+    if (searchInput && productGrid) {
+        searchInput.addEventListener('input', function() {
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => {
+                const query = searchInput.value;
+                fetch(`/ajax/product-search/?q=${encodeURIComponent(query)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        productGrid.innerHTML = data.html;
+                    });
+            }, 250); // Debounce for 250ms
+        });
+    }
+});
+</script>
 
 {% endblock %}

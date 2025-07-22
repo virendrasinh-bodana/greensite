@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5" style="max-width: 700px;">
+    <h2 class="mb-4">My Submitted Ideas</h2>
+    {% if ideas %}
+        <ul class="list-group">
+            {% for idea in ideas %}
+                <li class="list-group-item mb-3">
+                    <h5 class="mb-1">{{ idea.title }}</h5>
+                    <p class="mb-1">{{ idea.description|truncatechars:100 }}</p>
+                    <small class="text-muted">Submitted on {{ idea.created_at|date:"M d, Y H:i" }}</small>
+                    <div class="mt-2">
+                        <a href="{% url 'idea_detail' idea.pk %}" class="btn btn-outline-success btn-sm">View</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="alert alert-info">You haven't submitted any ideas yet.</div>
+    {% endif %}
+</div>
+{% endblock %} 

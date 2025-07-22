@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
+from .views import IdeaCreateView, my_ideas, IdeaDetailView, product_search_ajax, article_search_ajax
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -25,7 +26,7 @@ urlpatterns = [
     path('upload/add/', views.UploadCreateView.as_view(), name='upload_add'),
     path('categories/', views.CategoryListView.as_view(), name='categories'),
     path('category/<int:pk>/', views.CategoryDetailView.as_view(), name='category_detail'),
-    path('submit/', views.submit_idea, name='submit_idea'),
+    path('submit/', IdeaCreateView.as_view(), name='submit_idea'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('register/', views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='main/login.html'), name='login'),
@@ -36,4 +37,8 @@ urlpatterns = [
     path('cart/', views.cart_view, name='cart'),
     path('add-to-cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
     path('remove-from-cart/<int:product_id>/', views.remove_from_cart, name='remove_from_cart'),
+    path('ajax/article-search/', article_search_ajax, name='article_search_ajax'),
+    path('ajax/product-search/', product_search_ajax, name='product_search_ajax'),
+    path('my-ideas/<int:pk>/', IdeaDetailView.as_view(), name='idea_detail'),
+    path('my-ideas/', my_ideas, name='my_ideas'),
 ]

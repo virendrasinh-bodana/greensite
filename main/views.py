@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Article, Product, Review, UserProfile, VisitHistory, ContactMessage, Upload, Category, Event
-from .forms import RegisterForm, ProductForm, ReviewForm, UserProfileForm,ContactMessageForm, UploadForm, CategoryForm, ArticleForm
+from .models import Article, Product, Review, UserProfile, VisitHistory, ContactMessage, Upload, Category, Event, Idea
+from .forms import RegisterForm, ProductForm, ReviewForm, UserProfileForm,ContactMessageForm, UploadForm, CategoryForm, ArticleForm, IdeaForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.template.loader import render_to_string
+from django.views.decorators.http import require_GET
 
 
 # Home page — show articles and products
@@ -253,3 +255,41 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
     form_class = ArticleForm
     template_name = 'main/article_form.html'
     success_url = reverse_lazy('articles')
+
+@require_GET
+def article_search_ajax(request):
+    q = request.GET.get('q', '')
+    articles = Article.objects.all()
+    if q:
+        articles = articles.filter(title__icontains=q)
+    html = render_to_string('main/_article_grid.html', {'articles': articles}, request=request)
+    return JsonResponse({'html': html})
+
+@require_GET
+def product_search_ajax(request):
+    q = request.GET.get('q', '')
+    products = Product.objects.all()
+    if q:
+        products = products.filter(name__icontains=q)
+    html = render_to_string('main/_product_grid.html', {'products': products, 'cart': request.session.get('cart', {})}, request=request)
+    return JsonResponse({'html': html})
+
+class IdeaCreateView(LoginRequiredMixin, CreateView):
+    model = Idea
+    form_class = IdeaForm
+    template_name = 'main/idea_form.html'
+    success_url = reverse_lazy('dashboard')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+@login_required
+def my_ideas(request):
+    ideas = Idea.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'main/my_ideas.html', {'ideas': ideas})
+
+class IdeaDetailView(LoginRequiredMixin, DetailView):
+    model = Idea
+    template_name = 'main/idea_detail.html'
+    context_object_name = 'idea'

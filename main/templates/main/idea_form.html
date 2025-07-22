@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .idea-form-card {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 2px 16px rgba(44,62,80,0.08);
+        padding: 36px 32px 28px 32px;
+        max-width: 500px;
+        margin: 48px auto 32px auto;
+    }
+    .idea-form-card label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 500;
+    }
+    .idea-form-card input[type="text"],
+    .idea-form-card textarea,
+    .idea-form-card input[type="file"] {
+        width: 100%;
+        display: block;
+        margin-bottom: 18px;
+        padding: 8px 10px;
+        border-radius: 6px;
+        border: 1px solid #d0d0d0;
+        font-size: 1rem;
+        background: #f9f9f9;
+    }
+    .idea-form-card textarea {
+        min-height: 140px;
+        resize: vertical;
+    }
+    .idea-form-card .form-text {
+        margin-top: -12px;
+        margin-bottom: 16px;
+        font-size: 0.97rem;
+    }
+    .idea-form-card button[type="submit"] {
+        margin-top: 10px;
+    }
+</style>
+<div class="idea-form-card">
+    <h2 class="mb-4 text-center">Submit Your Idea</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_title">Title</label>
+            {{ form.title }}
+        </div>
+        <div class="mb-3">
+            <label for="id_description">Description</label>
+            {{ form.description }}
+        </div>
+        <div class="mb-3">
+            <label for="id_file">File (optional)</label>
+            {{ form.file }}
+            <small class="form-text text-muted">Attach a file (image, PDF, etc.)</small>
+        </div>
+        <button type="submit" class="btn btn-success w-100">Submit Idea</button>
+    </form>
+</div>
+{% endblock %} 

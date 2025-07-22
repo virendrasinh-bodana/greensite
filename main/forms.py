@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Category, Article, Product, Review, UserProfile, VisitHistory, ContactMessage,Upload
+from .models import Category, Article, Product, Review, UserProfile, VisitHistory, ContactMessage,Upload, Idea
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField()
@@ -72,3 +72,8 @@ class UploadForm(forms.ModelForm):
     class Meta:
         model = Upload
         fields = ['file', 'description']
+
+class IdeaForm(forms.ModelForm):
+    class Meta:
+        model = Idea
+        fields = ['title', 'description', 'file']

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5" style="max-width: 700px;">
+    <div class="card shadow-sm p-4">
+        <h2 class="mb-3">{{ idea.title }}</h2>
+        <p class="mb-3">{{ idea.description }}</p>
+        {% if idea.file %}
+            <div class="mb-3">
+                <a href="{{ idea.file.url }}" class="btn btn-outline-success" download>Download Attachment</a>
+            </div>
+        {% endif %}
+        <small class="text-muted">Submitted on {{ idea.created_at|date:"M d, Y H:i" }}</small>
+        <div class="mt-4">
+            <a href="{% url 'my_ideas' %}" class="btn btn-link">&larr; Back to My Ideas</a>
+        </div>
+    </div>
+</div>
+{% endblock %} 
