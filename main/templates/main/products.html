@@ -1,30 +1,55 @@
 {% extends 'base.html' %}
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Products - GreenSite</title>
-</head>
-<body>
 
 {% block content %}
-    <h1>Our Products</h1>
-    <ul>
-        {% for product in products %}
-            <li>
-                <h2>{{ product.name }}</h2>
-                <p>{{ product.description }}</p>
+<h1 class="mb-4">Our Products</h1>
+{% if user.is_authenticated %}
+    <a href="{% url 'product_add' %}" class="btn btn-primary mb-4">Sell Product</a>
+{% endif %}
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+    {% for product in products|slice:"6:" %}
+        <div class="col">
+            <div class="card h-100 shadow-sm rounded-4 border-0 product-tile" style="transition: transform 0.2s;">
                 {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200">
+                    <img src="{{ product.image.url }}" class="card-img-top rounded-top-4 product-image" alt="{{ product.name }}">
                 {% endif %}
-                <p>Added on {{ product.created_at|date:"M d, Y" }}</p>
-            </li>
-        {% empty %}
-            <li>No products available.</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'home' %}">Back to Home</a>
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text fw-bold text-success mb-1">${{ product.price }}</p>
+                    <p class="card-text">{{ product.description }}</p>
+                    {% if product.id|stringformat:"s" in cart %}
+                        <button class="btn btn-secondary btn-sm mt-2" disabled>Added to Cart</button>
+                    {% else %}
+                        <form method="post" action="{% url 'add_to_cart' product.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success btn-sm mt-2">Add to Cart</button>
+                        </form>
+                    {% endif %}
+                </div>
+                <div class="card-footer bg-white border-0">
+                    <small class="text-muted">Added on {{ product.created_at|date:"M d, Y" }}</small>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="col">
+            <div class="alert alert-info w-100">No products available.</div>
+        </div>
+    {% endfor %}
+</div>
+<a href="{% url 'home' %}" class="btn btn-outline-success mt-4">Back to Home</a>
+
+<style>
+.product-tile:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+.product-image {
+    object-fit: contain;
+    width: 100%;
+    max-height: 220px;
+    background: #f8f9fa;
+    display: block;
+}
+</style>
 
 {% endblock %}
-</body>
-</html>

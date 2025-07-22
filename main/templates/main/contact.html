@@ -1,18 +1,39 @@
 {% extends "base.html" %}
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Contact Us - GreenSite</title>
-</head>
-<body>
-
 {% block content %}
-    <h1>Contact Us</h1>
-    <p>Email: contact@greensite.com</p>
-    <p>Phone: +1 (123) 456-7890</p>
-    <p>Address: 123 Green Street, Eco City, Earth</p>
-    <a href="{% url 'home' %}">Back to Home</a>
+<div class="container py-5">
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-8 text-center">
+            <h1 class="display-4 mb-3">Contact Us</h1>
+            <p class="lead">We'd love to hear from you! Whether you have questions, feedback, or want to get involved with GreenSite, reach out to us using the information below or the contact form.</p>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-md-6 mb-4 mb-md-0">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title">Contact Information</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Email:</strong> contact@greensite.com</li>
+                        <li class="list-group-item"><strong>Phone:</strong> +1 (123) 456-7890</li>
+                        <li class="list-group-item"><strong>Address:</strong> 123 Green Street, Eco City, Earth</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title mb-3">Send Us a Message</h3>
+                    <a href="{% url 'contact_send' %}" class="btn btn-success btn-lg w-100 mb-2">Contact Form</a>
+                    <p class="text-muted mb-0">Click the button above to fill out our contact form and we'll get back to you as soon as possible.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <a href="{% url 'home' %}" class="btn btn-outline-success btn-lg">Back to Home</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
-</body>
-</html>

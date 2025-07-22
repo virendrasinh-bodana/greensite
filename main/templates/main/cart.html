@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Your Cart</h1>
+    {% if cart_items %}
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr data-product-id="{{ item.product.id }}">
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ item.product.price }}</td>
+                    <td>${{ item.subtotal }}</td>
+                    <td>
+                        <form class="remove-from-cart-form d-inline" data-product-id="{{ item.product.id }}" method="post" action="{% url 'remove_from_cart' item.product.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-end">
+            <h4>Total: ${{ total }}</h4>
+        </div>
+    {% else %}
+        <div class="alert alert-info">Your cart is empty.</div>
+    {% endif %}
+    <a href="{% url 'products' %}" class="btn btn-outline-success mt-3">Continue Shopping</a>
+</div>
+{% endblock %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.remove-from-cart-form').forEach(function(form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var row = form.closest('tr');
+            var url = form.getAttribute('action');
+            var csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            }).then(function(response) {
+                if (response.ok) {
+                    row.remove();
+                    // If no more rows, show empty message
+                    if (document.querySelectorAll('tbody tr').length === 0) {
+                        document.querySelector('.table').remove();
+                        document.querySelector('.text-end').remove();
+                        var emptyDiv = document.createElement('div');
+                        emptyDiv.className = 'alert alert-info';
+                        emptyDiv.textContent = 'Your cart is empty.';
+                        document.querySelector('.container.mt-4').appendChild(emptyDiv);
+                    }
+                    // Dispatch event to update Add to Cart buttons
+                    window.dispatchEvent(new CustomEvent('cart-updated', { detail: { productId: form.getAttribute('data-product-id') } }));
+                }
+            });
+        });
+    });
+});
+</script> 
