@@ -395,10 +395,14 @@
                             {% if product.id|stringformat:"s" in cart %}
                                 <button class="btn btn-secondary btn-sm mt-2" disabled>Added to Cart</button>
                             {% else %}
+                                {% if user.is_authenticated %}
                                 <form method="post" action="{% url 'add_to_cart' product.id %}">
                                     {% csrf_token %}
                                     <button type="submit" class="btn btn-success btn-sm mt-2">Add to Cart</button>
                                 </form>
+                                {% else %}
+                                <button type="button" class="btn btn-success btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#loginRequiredModal">Add to Cart</button>
+                                {% endif %}
                             {% endif %}
                         </div>
                     </div>

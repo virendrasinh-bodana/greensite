@@ -33,6 +33,18 @@ class ArticleListView(ListView):
     template_name = 'main/articles.html'
     context_object_name = 'articles'
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        q = self.request.GET.get('q')
+        if q:
+            queryset = queryset.filter(title__icontains=q)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['q'] = self.request.GET.get('q', '')
+        return context
+
 
 # Article detail (Class-based)
 class ArticleDetailView(DetailView):
@@ -43,9 +55,12 @@ class ArticleDetailView(DetailView):
 
 # Product listing
 def product_list(request):
+    q = request.GET.get('q', '')
     products = Product.objects.all()
+    if q:
+        products = products.filter(name__icontains=q)
     cart = request.session.get('cart', {})
-    return render(request, 'main/products.html', {'products': products, 'cart': cart})
+    return render(request, 'main/products.html', {'products': products, 'cart': cart, 'q': q})
 
 
 # Product detail view
@@ -201,6 +216,7 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
+@login_required
 def add_to_cart(request, product_id):
     if request.method == 'POST':
         cart = request.session.get('cart', {})
